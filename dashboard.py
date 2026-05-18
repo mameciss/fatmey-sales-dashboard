@@ -14,7 +14,7 @@ st.sidebar.markdown("### CEO Dashboard")
 st.sidebar.info("""
 FATMEY Analytics Platform
 
-Beauty & Cosmetics Intelligence
+Beauty & Cosmetics 
 """)
 
 page = st.sidebar.radio(
@@ -26,6 +26,49 @@ page = st.sidebar.radio(
     ]
 )
 
+if page == "Overview":
+
+    st.markdown("## Business Overview")
+
+    st.metric("Revenue", "8,230,000 FG")
+    st.metric("Orders", "16")
+    st.metric("Units Sold", "48")
+
+
+elif page == "Products":
+
+    st.markdown("## Products Dataset")
+
+    st.dataframe(df)
+
+    st.markdown("## Stock Alerts")
+
+    low_stock = df[df["stock"] <= 10]
+
+    st.dataframe(low_stock)
+
+
+elif page == "Sales Analytics":
+
+    st.markdown("## Sales Analytics")
+
+    st.markdown("### Revenue by Category")
+
+    revenue_by_category = {
+        "Haircare": 5350000,
+        "Skincare": 1450000,
+        "Makeup": 900000,
+        "Beardcare": 530000
+    }
+
+    fig, ax = plt.subplots()
+
+    ax.bar(
+        revenue_by_category.keys(),
+        revenue_by_category.values()
+    )
+
+    st.pyplot(fig)
 st.markdown("""
 # ✨ FATMEY Sales Dashboard
 
@@ -115,36 +158,3 @@ total_revenue = orders["revenue"].sum()
 total_orders = len(orders)
 total_units_sold = orders["quantity"].sum()
 
-col1, col2, col3 = st.columns(3)
-
-col1.metric("Simulated Revenue", f"{total_revenue:,} FG")
-col2.metric("Simulated Orders", total_orders)
-col3.metric("Units Sold", total_units_sold)
-
-st.subheader("Revenue by Category")
-
-revenue_by_category = orders.groupby("category")["revenue"].sum().sort_values(ascending=False)
-
-fig2, ax2 = plt.subplots()
-revenue_by_category.plot(kind="bar", ax=ax2)
-plt.title("Simulated Revenue by Category")
-plt.xlabel("Category")
-plt.ylabel("Revenue (FG)")
-st.pyplot(fig2)
-
-st.subheader("Top Selling Products")
-
-top_products = orders.groupby("product")["quantity"].sum().sort_values(ascending=False).head(5)
-
-st.dataframe(top_products)
-
-st.subheader("Sales by Channel")
-
-channel_sales = orders.groupby("channel")["revenue"].sum().sort_values(ascending=False)
-
-fig3, ax3 = plt.subplots()
-channel_sales.plot(kind="bar", ax=ax3)
-plt.title("Simulated Revenue by Sales Channel")
-plt.xlabel("Channel")
-plt.ylabel("Revenue (FG)")
-st.pyplot(fig3)
