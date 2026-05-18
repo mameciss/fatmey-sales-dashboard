@@ -16,9 +16,29 @@ st.sidebar.title("✨ FATMEY")
 st.sidebar.markdown("### CEO Dashboard")
 st.sidebar.info("FATMEY Analytics Platform\n\nBeauty & Cosmetics")
 
-page = st.sidebar.radio("Navigation", ["Overview", "Products", "Sales Analytics"])
+page = st.sidebar.radio("Navigation", ["Accueil", "Overview", "Products", "Sales Analytics"])
 
-if page == "Overview":
+if page == "Accueil":
+    st.markdown("# ✨ FATMEY")
+    st.markdown("## Beauty & Cosmetics Analytics Platform")
+    st.write("Bienvenue sur le dashboard analytique simulé de la marque FATMEY en Guinée.")
+
+    st.markdown("""
+    Ce tableau de bord permet de :
+    - suivre les stocks
+    - analyser les catégories
+    - visualiser les produits
+    - surveiller les performances commerciales
+    - simuler les ventes par canal
+
+    🌐 Sites officiels :
+    - https://fatmeyshop.com
+    - https://fatmey.com
+    """)
+
+elif page == "Overview":
+
+
     st.markdown("# ✨ FATMEY Sales Dashboard")
     st.markdown("### Beauty & Cosmetics Analytics Platform")
     st.write("Bienvenue sur le dashboard analytique simulé de FATMEY.")
