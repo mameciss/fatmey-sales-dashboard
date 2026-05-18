@@ -12,16 +12,12 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True))
 
-# FATMEY branding
-
-
-)
 
 
 st.markdown("""
 ### Beauty & Cosmetics Analytics Platform
 
-Bienvenue sur le dashboard analytique de la marque FATMEY.
+Bienvenue sur le dashboard analytique de la marque FATMEY en GUINÉE.
 
 Ce dashboard permet de :
 - suivre les stocks
@@ -29,7 +25,7 @@ Ce dashboard permet de :
 - visualiser les produits
 - surveiller les performances commerciales
 
-🌐 Site officiel :
+🌐 Sites officiel :
 - https://fatmeyshop.com
 - https://fatmey.com
 """)
