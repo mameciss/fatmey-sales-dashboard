@@ -1,0 +1,16 @@
+product,category,price,stock,status
+Turmeric Soap,Skincare,90000,0,Out of Stock
+Avocado Hair Set,Haircare,480000,12,Available
+Castor Oil,Haircare,120000,18,Available
+Rosemary Oil,Haircare,150000,10,Available
+Beard Oil,Beardcare,80000,25,Available
+Beard Balm,Beardcare,100000,15,Available
+Turmeric Face Set,Skincare,450000,8,Available
+Blueberry Edge Control,Haircare,80000,20,Available
+Red Onion Hair Set,Haircare,600000,7,Available
+Liquid Blush,Makeup,100000,30,Available
+Lip Gloss Cherry,Makeup,90000,0,Out of Stock
+Foundation Matte,Makeup,200000,14,Available
+Eyeshadow Palette,Makeup,250000,11,Available
+Lavender Lotion,Bodycare,100000,0,Out of Stock
+Rose Body Lotion,Bodycare,100000,6,Available
