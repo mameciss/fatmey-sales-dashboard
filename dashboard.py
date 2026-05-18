@@ -39,7 +39,7 @@ elif page == "Products":
 
     st.markdown("## Products Dataset")
 
-    st.dataframe(df)
+    st.dataframe(products)
 
     st.markdown("## Stock Alerts")
 
