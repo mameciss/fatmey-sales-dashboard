@@ -2,6 +2,11 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+st.set_page_config(
+    page_title="FATMEY Dashboard",
+    layout="wide"
+)
+
 # Load data
 df = pd.read_csv("products.csv")
 
