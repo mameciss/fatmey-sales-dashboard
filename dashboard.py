@@ -8,111 +8,204 @@ st.set_page_config(
     page_icon="✨"
 )
 
-# Load data
-df = pd.read_csv("products.csv")
+products = pd.read_csv("products.csv")
 orders = pd.read_csv("orders_simulated.csv")
 orders["date"] = pd.to_datetime(orders["date"])
 
-# Global KPIs
 total_revenue = orders["revenue"].sum()
 total_orders = len(orders)
 total_units_sold = orders["quantity"].sum()
+average_order_value = total_revenue / total_orders
 
-# Sidebar
 st.sidebar.title("✨ FATMEY")
 st.sidebar.markdown("### CEO Dashboard")
-st.sidebar.info("FATMEY Analytics Platform\n\nBeauty & Cosmetics")
+st.sidebar.info("Données simulées pour portfolio tech/business.")
 
 page = st.sidebar.radio(
     "Navigation",
-    ["Home", "Overview", "Products", "Sales Analytics"]
+    ["Accueil", "Overview", "Products", "Sales Analytics", "CEO Insights"]
 )
 
-# HOME
-if page == "Home":
-    st.markdown("# ✨ FATMEY")
-    st.markdown("## Beauty & Cosmetics Analytics Platform")
-    st.write("Bienvenue sur le dashboard analytique simulé de la marque FATMEY en Guinée.")
+if page == "Accueil":
+    st.markdown("# ✨ FATMEY Analytics Dashboard")
+    st.markdown("## Beauty & Cosmetics Business Intelligence")
+
+    st.write(
+        "Bienvenue sur le dashboard analytique simulé de FATMEY. "
+        "Ce projet présente une solution de suivi des stocks, ventes et performances commerciales."
+    )
+
+    st.warning("Les données utilisées sont simulées. Aucune donnée client réelle n’est utilisée.")
 
     st.markdown("""
-Ce tableau de bord permet de :
+### Objectifs du dashboard
+- Suivre les stocks
+- Identifier les produits en rupture
+- Analyser les ventes par catégorie
+- Comparer les canaux de vente
+- Visualiser les produits les plus performants
 
-- suivre les stocks
-- analyser les catégories
-- visualiser les produits
-- surveiller les performances commerciales
-- simuler les ventes par canal
-
-🌐 Sites officiels :
-
+### Sites officiels
 - https://fatmeyshop.com
 - https://fatmey.com
 """)
 
-# OVERVIEW
 elif page == "Overview":
-    st.markdown("# ✨ FATMEY Sales Dashboard")
-    st.markdown("### Beauty & Cosmetics Analytics Platform")
-    st.write("Vue générale simulée des performances FATMEY.")
+    st.markdown("# Business Overview")
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
 
     col1.metric("Revenue", f"{total_revenue:,} FG", "+12%")
     col2.metric("Orders", total_orders, "+8%")
     col3.metric("Units Sold", total_units_sold, "+15%")
+    col4.metric("Avg Order Value", f"{average_order_value:,.0f} FG", "+5%")
 
-# PRODUCTS
-elif page == "Products":
-    st.markdown("## Products Dataset")
-    st.dataframe(df, use_container_width=True)
+    st.markdown("## Sales Over Time")
 
-    st.markdown("## Stock Alerts")
-    low_stock = df[df["stock"] <= 10]
-    st.dataframe(low_stock, use_container_width=True)
+    sales_over_time = orders.groupby("date")["revenue"].sum()
 
-# SALES ANALYTICS
-elif page == "Sales Analytics":
-    st.markdown("## Sales Analytics")
-
-    selected_channel = st.selectbox(
-        "Select Sales Channel",
-        orders["channel"].unique()
-    )
-
-    filtered_orders = orders[
-        orders["channel"] == selected_channel
-    ]
-
-    st.markdown("### Revenue by Category")
-
-    revenue_by_category = filtered_orders.groupby(
-        "category"
-    )["revenue"].sum().sort_values(ascending=False)
-
-    fig, ax = plt.subplots()
-    revenue_by_category.plot(kind="bar", ax=ax)
-    ax.set_title("Simulated Revenue by Category")
-    ax.set_xlabel("Category")
+    fig, ax = plt.subplots(figsize=(8, 4))
+    sales_over_time.plot(kind="line", marker="o", ax=ax)
+    ax.set_title("Simulated Revenue Over Time")
+    ax.set_xlabel("Date")
     ax.set_ylabel("Revenue (FG)")
     st.pyplot(fig)
 
-    st.markdown("### Top Selling Products")
+elif page == "Products":
+    st.markdown("# Products & Inventory")
 
-    top_products = filtered_orders.groupby(
-        "product"
-    )["quantity"].sum().sort_values(ascending=False).head(5)
+    st.dataframe(products, use_container_width=True)
 
-    st.dataframe(top_products, use_container_width=True)
+    st.markdown("## Inventory Summary")
 
-    st.markdown("### Sales by Channel")
+    total_products = len(products)
+    total_stock = products["stock"].sum()
+    out_of_stock = len(products[products["stock"] == 0])
+    inventory_value = (products["price"] * products["stock"]).sum()
 
-    channel_sales = orders.groupby(
-        "channel"
-    )["revenue"].sum().sort_values(ascending=False)
+    col1, col2, col3, col4 = st.columns(4)
 
-    fig2, ax2 = plt.subplots()
-    channel_sales.plot(kind="bar", ax=ax2)
-    ax2.set_title("Simulated Revenue by Sales Channel")
-    ax2.set_xlabel("Channel")
-    ax2.set_ylabel("Revenue (FG)")
-    st.pyplot(fig2)
+    col1.metric("Products", total_products)
+    col2.metric("Stock Units", total_stock)
+    col3.metric("Out of Stock", out_of_stock)
+    col4.metric("Inventory Value", f"{inventory_value:,} FG")
+
+    st.markdown("## Stock Alerts")
+
+    low_stock = products[(products["stock"] > 0) & (products["stock"] <= 10)]
+    no_stock = products[products["stock"] == 0]
+
+    st.markdown("### Low Stock")
+    st.dataframe(low_stock, use_container_width=True)
+
+    st.markdown("### Out of Stock")
+    st.dataframe(no_stock, use_container_width=True)
+
+elif page == "Sales Analytics":
+    st.markdown("# Sales Analytics")
+
+    st.sidebar.markdown("## Filters")
+
+    selected_channel = st.sidebar.multiselect(
+        "Sales Channel",
+        options=orders["channel"].unique(),
+        default=orders["channel"].unique()
+    )
+
+    selected_category = st.sidebar.multiselect(
+        "Category",
+        options=orders["category"].unique(),
+        default=orders["category"].unique()
+    )
+
+    date_range = st.sidebar.date_input(
+        "Date Range",
+        value=(
+            orders["date"].min(),
+            orders["date"].max()
+        )
+    )
+
+    if len(date_range) == 2:
+        start_date = pd.to_datetime(date_range[0])
+        end_date = pd.to_datetime(date_range[1])
+    else:
+        start_date = orders["date"].min()
+        end_date = orders["date"].max()
+
+    filtered_orders = orders[
+        (orders["channel"].isin(selected_channel)) &
+        (orders["category"].isin(selected_category)) &
+        (orders["date"] >= start_date) &
+        (orders["date"] <= end_date)
+    ]
+
+    filtered_revenue = filtered_orders["revenue"].sum()
+    filtered_orders_count = len(filtered_orders)
+    filtered_units = filtered_orders["quantity"].sum()
+
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Filtered Revenue", f"{filtered_revenue:,} FG")
+    col2.metric("Filtered Orders", filtered_orders_count)
+    col3.metric("Filtered Units Sold", filtered_units)
+
+    st.markdown("## Revenue by Category")
+
+    revenue_by_category = filtered_orders.groupby("category")["revenue"].sum().sort_values(ascending=False)
+
+    if revenue_by_category.empty:
+        st.warning("No data available for selected filters.")
+    else:
+        fig, ax = plt.subplots(figsize=(8, 4))
+        revenue_by_category.plot(kind="bar", ax=ax, color="#F4A261")
+        ax.set_title("Revenue by Category")
+        ax.set_xlabel("Category")
+        ax.set_ylabel("Revenue (FG)")
+        st.pyplot(fig)
+
+    st.markdown("## Sales by Channel")
+
+    sales_by_channel = filtered_orders.groupby("channel")["revenue"].sum().sort_values(ascending=False)
+
+    if sales_by_channel.empty:
+        st.warning("No channel data available.")
+    else:
+        fig2, ax2 = plt.subplots(figsize=(8, 4))
+        sales_by_channel.plot(kind="bar", ax=ax2, color="#2A9D8F")
+        ax2.set_title("Revenue by Sales Channel")
+        ax2.set_xlabel("Channel")
+        ax2.set_ylabel("Revenue (FG)")
+        st.pyplot(fig2)
+
+    st.markdown("## Top Selling Products")
+
+    top_products = filtered_orders.groupby("product")["quantity"].sum().sort_values(ascending=False).head(5)
+
+    if top_products.empty:
+        st.warning("No product data available.")
+    else:
+        st.dataframe(top_products, use_container_width=True)
+
+elif page == "CEO Insights":
+    st.markdown("# CEO Insights")
+
+    best_channel = orders.groupby("channel")["revenue"].sum().idxmax()
+    best_category = orders.groupby("category")["revenue"].sum().idxmax()
+    best_product = orders.groupby("product")["quantity"].sum().idxmax()
+
+    st.success(f"Best sales channel: {best_channel}")
+    st.success(f"Top revenue category: {best_category}")
+    st.success(f"Best-selling product: {best_product}")
+
+    st.markdown("""
+### Recommendations
+- Restock products with low inventory.
+- Prioritize marketing campaigns on the strongest sales channel.
+- Promote the best-performing category more aggressively.
+- Monitor out-of-stock products weekly.
+""")
+
+st.markdown("---")
+st.caption(
+    "FATMEY Analytics Dashboard — Simulated portfolio project built with Python, Pandas, Matplotlib and Streamlit."
+)
