@@ -25,11 +25,11 @@ st.sidebar.info("FATMEY Analytics Platform\n\nBeauty & Cosmetics")
 
 page = st.sidebar.radio(
     "Navigation",
-    ["Accueil", "Overview", "Products", "Sales Analytics"]
+    ["Home", "Overview", "Products", "Sales Analytics"]
 )
 
-# ACCUEIL
-if page == "Accueil":
+# HOME
+if page == "Home":
     st.markdown("# ✨ FATMEY")
     st.markdown("## Beauty & Cosmetics Analytics Platform")
     st.write("Bienvenue sur le dashboard analytique simulé de la marque FATMEY en Guinée.")
