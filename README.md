@@ -6,7 +6,11 @@ Premium business intelligence dashboard built with Python, Pandas, Matplotlib an
 
 
 
-\## 🌍 Live Demo
+\---
+
+
+
+\# 🌍 Live Demo
 
 
 
@@ -18,11 +22,11 @@ https://fatmey-sales-dashboard-m7mcawmrfye57enjyfucud.streamlit.app
 
 
 
-\## 📌 Features
+\# 📌 Features
 
 
 
-\- Multi-page dashboard
+\- Multi-page analytics dashboard
 
 \- Business KPIs
 
@@ -30,13 +34,13 @@ https://fatmey-sales-dashboard-m7mcawmrfye57enjyfucud.streamlit.app
 
 \- Sales analytics
 
-\- Dynamic filters
-
 \- CEO insights
+
+\- Dynamic filters
 
 \- Interactive charts
 
-\- Premium UI design
+\- Premium dark UI
 
 
 
@@ -44,7 +48,7 @@ https://fatmey-sales-dashboard-m7mcawmrfye57enjyfucud.streamlit.app
 
 
 
-\## 🛠 Technologies Used
+\# 🛠 Technologies Used
 
 
 
@@ -62,13 +66,77 @@ https://fatmey-sales-dashboard-m7mcawmrfye57enjyfucud.streamlit.app
 
 
 
-\## 📊 Dashboard Sections
+\# 📸 Dashboard Preview
+
+
+
+\## 🏠 Accueil
+
+
+
+<img width="100%" src="screenshots/accueil.png">
+
+
+
+\---
+
+
+
+\## 📊 Overview
+
+
+
+<img width="100%" src="screenshots/overview.png">
+
+
+
+\---
+
+
+
+\## 📦 Products \& Inventory
+
+
+
+<img width="100%" src="screenshots/products.png">
+
+
+
+\---
+
+
+
+\## 📈 Sales Analytics
+
+
+
+<img width="100%" src="screenshots/sales.png">
+
+
+
+\---
+
+
+
+\## 🧠 CEO Insights
+
+
+
+<img width="100%" src="screenshots/ceo.png">
+
+
+
+\---
+
+
+
+\# 📊 Dashboard Sections
 
 
 
 \### Accueil
 
-Overview of the simulated FATMEY analytics platform.
+Presentation of the FATMEY analytics platform.
 
 
 
@@ -92,7 +160,7 @@ Revenue analysis by category and sales channel.
 
 \### CEO Insights
 
-Strategic business recommendations and top performance indicators.
+Strategic recommendations and business intelligence summary.
 
 
 
@@ -100,11 +168,11 @@ Strategic business recommendations and top performance indicators.
 
 
 
-\## ⚠️ Disclaimer
+\# ⚠️ Disclaimer
 
 
 
-This project uses simulated business data for portfolio and educational purposes only.
+This project uses simulated business data for educational and portfolio purposes only.
 
 
 
@@ -112,7 +180,7 @@ This project uses simulated business data for portfolio and educational purposes
 
 
 
-\## 👩🏾‍💻 Author
+\# 👩🏾‍💻 Author
 
 
 
