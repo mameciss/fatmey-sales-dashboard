@@ -37,28 +37,64 @@ elif page == "Products":
     st.dataframe(low_stock)
 
 elif page == "Sales Analytics":
+
     st.markdown("## Sales Analytics")
 
+    selected_channel = st.selectbox(
+        "Select Sales Channel",
+        orders["channel"].unique()
+    )
+
+    filtered_orders = orders[
+        orders["channel"] == selected_channel
+    ]
+
     st.markdown("### Revenue by Category")
-    revenue_by_category = orders.groupby("category")["revenue"].sum().sort_values(ascending=False)
+
+    revenue_by_category = filtered_orders.groupby(
+        "category"
+    )["revenue"].sum().sort_values(ascending=False)
 
     fig, ax = plt.subplots()
-    revenue_by_category.plot(kind="bar", ax=ax)
+
+    revenue_by_category.plot(
+        kind="bar",
+        ax=ax
+    )
+
     ax.set_title("Simulated Revenue by Category")
     ax.set_xlabel("Category")
     ax.set_ylabel("Revenue (FG)")
+
     st.pyplot(fig)
 
     st.markdown("### Top Selling Products")
-    top_products = orders.groupby("product")["quantity"].sum().sort_values(ascending=False).head(5)
+
+    top_products = filtered_orders.groupby(
+        "product"
+    )["quantity"].sum().sort_values(
+        ascending=False
+    ).head(5)
+
     st.dataframe(top_products)
 
     st.markdown("### Sales by Channel")
-    channel_sales = orders.groupby("channel")["revenue"].sum().sort_values(ascending=False)
+
+    channel_sales = orders.groupby(
+        "channel"
+    )["revenue"].sum().sort_values(
+        ascending=False
+    )
 
     fig2, ax2 = plt.subplots()
-    channel_sales.plot(kind="bar", ax=ax2)
+
+    channel_sales.plot(
+        kind="bar",
+        ax=ax2
+    )
+
     ax2.set_title("Simulated Revenue by Sales Channel")
     ax2.set_xlabel("Channel")
     ax2.set_ylabel("Revenue (FG)")
+
     st.pyplot(fig2)
