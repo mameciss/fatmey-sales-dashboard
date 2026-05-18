@@ -14,9 +14,7 @@ st.markdown("""
 
 # FATMEY branding
 
-st.image(
-    "https://fatmeyshop.com/cdn/shop/files/logo.png",
-    width=180
+
 )
 
 
