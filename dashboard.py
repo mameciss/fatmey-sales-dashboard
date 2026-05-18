@@ -7,6 +7,31 @@ st.set_page_config(
     layout="wide"
 )
 
+# FATMEY branding
+
+st.image(
+    "https://fatmeyshop.com/cdn/shop/files/logo.png",
+    width=180
+)
+
+st.title("FATMEY Sales Dashboard")
+
+st.markdown("""
+### Beauty & Cosmetics Analytics Platform
+
+Bienvenue sur le dashboard analytique de la marque FATMEY.
+
+Ce dashboard permet de :
+- suivre les stocks
+- analyser les catégories
+- visualiser les produits
+- surveiller les performances commerciales
+
+🌐 Site officiel :
+- https://fatmeyshop.com
+- https://fatmey.com
+""")
+
 # Load data
 df = pd.read_csv("products.csv")
 
