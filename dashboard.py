@@ -2,10 +2,15 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-st.set_page_config(
-    page_title="FATMEY Dashboard",
-    layout="wide"
-)
+st.markdown("""
+<div style='display:flex;align-items:center;gap:15px;'>
+
+<h1 style='font-size:60px;margin-bottom:0;'>
+✨ FATMEY
+</h1>
+
+</div>
+""", unsafe_allow_html=True))
 
 # FATMEY branding
 
@@ -14,7 +19,6 @@ st.image(
     width=180
 )
 
-st.title("FATMEY Sales Dashboard")
 
 st.markdown("""
 ### Beauty & Cosmetics Analytics Platform
