@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+plt.style.use("ggplot")
 
 st.set_page_config(
     page_title="FATMEY Dashboard",
@@ -110,7 +111,9 @@ if page == "Accueil":
 
 elif page == "Overview":
     st.markdown("# Business Overview")
-
+st.markdown("""
+Analyse globale des ventes, commandes et performances commerciales simulées de FATMEY.
+""")
     col1, col2, col3, col4 = st.columns(4)
 
     col1.metric("Revenue", f"{total_revenue:,} FG", "+12%")
@@ -122,8 +125,19 @@ elif page == "Overview":
 
     sales_over_time = orders.groupby("date")["revenue"].sum()
 
-    fig, ax = plt.subplots(figsize=(8, 4))
-    sales_over_time.plot(kind="line", marker="o", ax=ax)
+ fig, ax = plt.subplots(figsize=(12, 5))
+fig.patch.set_facecolor("#F8F6F2")
+ax.set_facecolor("white")
+
+    sales_over_time.plot(
+    kind="line",
+    marker="o",
+    linewidth=3,
+    markersize=8,
+    ax=ax,
+    color="#C19A6B"
+)
+
     ax.set_title("Simulated Revenue Over Time")
     ax.set_xlabel("Date")
     ax.set_ylabel("Revenue (FG)")
@@ -161,6 +175,10 @@ elif page == "Products":
 
 elif page == "Sales Analytics":
     st.markdown("# Sales Analytics")
+
+st.markdown("""
+Visualisation analytique des revenus, catégories et canaux de vente.
+""")
 
     st.sidebar.markdown("## Filters")
 
@@ -214,7 +232,11 @@ elif page == "Sales Analytics":
     if revenue_by_category.empty:
         st.warning("No data available for selected filters.")
     else:
-        fig, ax = plt.subplots(figsize=(8, 4))
+
+fig, ax = plt.subplots(figsize=(10, 5))
+fig.patch.set_facecolor("#F8F6F2")
+ax.set_facecolor("white")
+
         revenue_by_category.plot(kind="bar", ax=ax, color="#F4A261")
         ax.set_title("Revenue by Category")
         ax.set_xlabel("Category")
@@ -246,7 +268,7 @@ elif page == "Sales Analytics":
 
 elif page == "CEO Insights":
     st.markdown("# CEO Insights")
-
+st.info("Résumé exécutif des performances commerciales et recommandations stratégiques.")
     best_channel = orders.groupby("channel")["revenue"].sum().idxmax()
     best_category = orders.groupby("category")["revenue"].sum().idxmax()
     best_product = orders.groupby("product")["quantity"].sum().idxmax()
