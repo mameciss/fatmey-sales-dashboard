@@ -129,30 +129,6 @@ category_counts.plot(kind="bar", ax=ax)
 plt.title("Products by Category")
 
 st.pyplot(fig)
-total_revenue = orders["revenue"].sum()
-total_orders = len(orders)
-total_units_sold = orders["quantity"].sum()
-st.markdown("## Business Overview")
-
-col1, col2, col3 = st.columns(3)
-
-col1.metric(
-    "Revenue",
-    f"{total_revenue:,} FG",
-    "+12%"
-)
-
-col2.metric(
-    "Orders",
-    total_orders,
-    "+8%"
-)
-
-col3.metric(
-    "Units Sold",
-    total_units_sold,
-    "+15%"
-)
 
 total_revenue = orders["revenue"].sum()
 total_orders = len(orders)
