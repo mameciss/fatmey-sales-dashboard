@@ -58,3 +58,15 @@ total_inventory_value = df["inventory_value"].sum()
 print(f"Total inventory value: {total_inventory_value:,} FG")
 
 print(top_products[["product", "price"]].head(5))
+
+import matplotlib.pyplot as plt
+
+# ===== SALES CATEGORY CHART =====
+
+category_counts.plot(kind="bar")
+
+plt.title("Products by Category - FATMEY")
+plt.xlabel("Category")
+plt.ylabel("Number of Products")
+
+plt.show()
