@@ -37,4 +37,24 @@ print("\n===== TOP EXPENSIVE PRODUCTS =====\n")
 
 top_products = df.sort_values(by="price", ascending=False)
 
+# Stock alerts
+print("\n===== STOCK ALERTS =====\n")
+
+low_stock = df[(df["stock"] > 0) & (df["stock"] <= 10)]
+out_stock = df[df["stock"] == 0]
+
+print("Low stock products:")
+print(low_stock[["product", "stock"]])
+
+print("\nOut of stock products:")
+print(out_stock[["product", "stock"]])
+
+# Potential inventory value
+print("\n===== INVENTORY VALUE =====\n")
+
+df["inventory_value"] = df["price"] * df["stock"]
+total_inventory_value = df["inventory_value"].sum()
+
+print(f"Total inventory value: {total_inventory_value:,} FG")
+
 print(top_products[["product", "price"]].head(5))
