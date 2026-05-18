@@ -8,6 +8,64 @@ st.set_page_config(
     page_icon="✨"
 )
 
+st.markdown("""
+<style>
+
+/* Global */
+.main {
+    background-color: #F8F6F2;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background-color: #111827;
+}
+
+[data-testid="stSidebar"] * {
+    color: white;
+}
+
+/* Titles */
+h1 {
+    color: #111827;
+    font-weight: 800;
+}
+
+h2, h3 {
+    color: #1F2937;
+}
+
+/* Metrics */
+[data-testid="metric-container"] {
+    background-color: white;
+    border: 1px solid #E5E7EB;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.04);
+}
+
+/* Buttons */
+.stButton>button {
+    background-color: #C19A6B;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 0.5rem 1rem;
+}
+
+/* Tables */
+[data-testid="stDataFrame"] {
+    background-color: white;
+    border-radius: 10px;
+}
+
+/* Alerts */
+.stAlert {
+    border-radius: 12px;
+}
+
+</style>
+""", unsafe_allow_html=True)
 products = pd.read_csv("products.csv")
 orders = pd.read_csv("orders_simulated.csv")
 orders["date"] = pd.to_datetime(orders["date"])
