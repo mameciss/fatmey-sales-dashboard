@@ -265,5 +265,5 @@ elif page == "CEO Insights":
 
 st.markdown("---")
 st.caption(
-    "FATMEY Analytics Dashboard — Simulated portfolio project built with Python, Pandas, Matplotlib and Streamlit"
+    "FATMEY Analytics Dashboard — Simulated portfolio project built with Python, Pandas, Matplotlib and Streamlit."
 )
