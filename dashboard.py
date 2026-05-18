@@ -468,7 +468,7 @@ elif page == "CEO Insights":
 - Restock products with low inventory.
 - Prioritize marketing campaigns on the strongest sales channel.
 - Promote the best-performing category more aggressively.
-- Monitor out-of-stock products weekly.
+- Monitor out-of-stock products weekly
 """)
 
 # ---------- FOOTER ----------
